@@ -1,0 +1,30 @@
+﻿@using Trang_Tin_News.Models
+
+<html>
+<head>
+
+</head>
+<body>
+    <form method="post" action="/News/Add" >
+@*        Author: <input type="text" name="name"/>
+*@        <br />
+        <br />
+        Title: <input type="text" name="til" />
+        <br />
+        <br />
+        Category:
+        <select name="cate">
+            @foreach(Category c in ViewBag.cate)
+            {
+                <option value="@c.CategoryId">@c.Title</option>
+            }
+        </select>
+        
+       <br />
+        <br />
+        Content: <input type="text" name="body" />
+
+        <input type="submit" value="Add" />
+    </form>
+</body>
+</html>

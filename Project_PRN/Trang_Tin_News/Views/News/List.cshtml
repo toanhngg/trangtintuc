@@ -1,0 +1,99 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    var ca = ViewBag.ca;
+    var list = ViewBag.list;
+}
+<h1>List of news</h1>
+<p>
+    <a href="/News/Create">Create</a>
+
+</p>
+<select id="filterList" onchange="filterList()">
+    <option value="">Select Category</option>
+    @foreach (var c in ca)
+    {
+        <option value="@c.Title">
+            @c.Title
+        </option>
+    }
+</select>
+
+<table class="table" id="list">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Date public
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Content
+            </th>
+            <th>
+               Action
+            </th>
+          
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in list)
+        {
+            <tr data-filter="@item.CategoryTitle">
+                <td>
+                    @item.NewsID
+                </td>
+                <td>
+                    @item.AuthorName
+                </td>
+                <td>
+                    @item.NewsDate
+                </td>
+                <td>
+                    @item.NewsTitle
+                </td>
+                <td>
+                    @item.CategoryTitle
+                </td>
+                <td>
+                    @item.NewsBody
+                </td>
+                <td>
+                    <a href="/News/Delete?id=@item.NewsID">Delete |</a>
+                    <a href="/News/Edit?id=@item.NewsID">Edit |</a>
+                    <a href="/News/Details?id=@item.NewsID">Detail</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function filterList() {
+        var selectBox = document.getElementById("filterList");
+        var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+        var list = document.querySelectorAll("#list tbody tr");
+
+        for (var i = 0; i < list.length; i++) {
+            var item = list[i];
+            if (selectedValue === "" || item.dataset.filter === selectedValue) {
+                item.style.display = "table-row";
+            } else {
+                item.style.display = "none";
+            }
+        }
+    }
+</script>

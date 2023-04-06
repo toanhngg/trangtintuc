@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Trang_Tin_News.props" />
+</Project>
